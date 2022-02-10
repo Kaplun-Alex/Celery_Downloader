@@ -18,6 +18,6 @@ services:
     build:
       context: ./Celery_Downloader
     volumes:
-      - ./cats:/app/src/cats
-    command: ['celery', '--workdir=.src/', '-A', 'proj', 'worker']
+      - ./Celery_Downloader/src/cats:/app/src/cats
+    command: ['celery', '--workdir=./src', '-A', 'src', 'worker']
 

@@ -10,11 +10,11 @@ catUrl = "https://cataas.com/cat"
 def home_download():
     resp = r.get(catUrl)
     print(resp)
-    file_ext = resp.headers.get('Content-type').split('/'[1])
+    file_ext = resp.headers.get('Content-type').split('/')[1]
     print(file_ext)
-    file_name = settings.BASE_DIR / 'cats' / (str(uuid.uuid4())) + " " + file_ext
+    file_name = settings.BASE_DIR / 'cats' / (str(uuid.uuid4()) + '.' + file_ext)
     print(file_name)
     with open(file_name, 'wb') as f:
-        for _ in resp.iter_content(chunk_size=128):
-            f.write(_)
+        for chunk in resp.iter_content(chunk_size=128):
+            f.write(chunk)
     return True
